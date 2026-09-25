@@ -1,0 +1,1987 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NASLab — A Space to Build & Explore</title>
+
+<meta name="description"
+      content="NASLab is a personal space for ideas, experiments, projects and exploration.">
+
+<meta name="theme-color" content="#080b0a">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet">
+
+<!-- Bootstrap 5 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet">
+
+<!-- Bootstrap Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+      rel="stylesheet">
+
+
+<style>
+
+    /* =====================================
+       GLOBAL
+    ===================================== */
+
+    :root {
+        --bg: #080b0a;
+        --bg-secondary: #0c100d;
+        --card: #101612;
+        --green: #a3ff68;
+        --green-soft: #76d94c;
+        --text: #f2f5f2;
+        --muted: #8d9890;
+        --border: rgba(255,255,255,0.08);
+        --mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 90px;
+    }
+
+    body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: 'Inter', sans-serif;
+        overflow-x: hidden;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    ::selection {
+        background: var(--green);
+        color: #080b0a;
+    }
+
+    .text-green {
+        color: var(--green);
+    }
+
+
+    /* =====================================
+       NAVBAR
+    ===================================== */
+
+    .navbar {
+        background: rgba(8,11,10,0.82);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+
+        border-bottom: 1px solid var(--border);
+
+        padding: 18px 0;
+
+        transition: 0.3s;
+    }
+
+    .navbar-brand {
+        color: var(--text);
+        font-size: 24px;
+        font-weight: 800;
+        letter-spacing: -1.5px;
+    }
+
+    .navbar-brand span {
+        color: var(--green);
+    }
+
+    .navbar-brand:hover {
+        color: white;
+    }
+
+    .nav-link {
+        color: #9da79f;
+        font-size: 13px;
+        margin-left: 22px;
+        transition: 0.3s;
+    }
+
+    .nav-link:hover {
+        color: var(--green);
+    }
+
+    .nav-contact {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+
+        color: var(--green);
+        border: 1px solid rgba(163,255,104,0.25);
+
+        padding: 10px 16px;
+        border-radius: 6px;
+
+        font-size: 12px;
+        margin-left: 25px;
+
+        transition: 0.3s;
+    }
+
+    .nav-contact:hover {
+        background: var(--green);
+        color: var(--bg);
+    }
+
+
+    /* =====================================
+       HERO SECTION
+    ===================================== */
+
+    .hero {
+        min-height: 100vh;
+
+        display: flex;
+        align-items: center;
+
+        position: relative;
+        overflow: hidden;
+
+        background-image:
+            linear-gradient(
+                rgba(163,255,104,0.025) 1px,
+                transparent 1px
+            ),
+            linear-gradient(
+                90deg,
+                rgba(163,255,104,0.025) 1px,
+                transparent 1px
+            );
+
+        background-size: 55px 55px;
+    }
+
+    .hero::before {
+        content: "";
+
+        position: absolute;
+
+        width: 600px;
+        height: 600px;
+
+        top: -100px;
+        right: -150px;
+
+        background: rgba(100,255,90,0.08);
+
+        filter: blur(150px);
+        border-radius: 50%;
+
+        pointer-events: none;
+
+        animation: glowPulse 7s ease-in-out infinite alternate;
+    }
+
+    .hero::after {
+        content: "";
+
+        position: absolute;
+
+        width: 350px;
+        height: 350px;
+
+        bottom: -200px;
+        left: -100px;
+
+        background: rgba(70,180,100,0.05);
+
+        filter: blur(100px);
+        border-radius: 50%;
+
+        pointer-events: none;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+
+        padding-top: 130px;
+        padding-bottom: 100px;
+    }
+
+    .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+
+        color: var(--green);
+
+        background: rgba(163,255,104,0.05);
+        border: 1px solid rgba(163,255,104,0.18);
+
+        padding: 10px 15px;
+        border-radius: 50px;
+
+        font-family: var(--mono);
+        font-size: 10px;
+
+        letter-spacing: 1px;
+
+        margin-bottom: 30px;
+    }
+
+    .pulse-dot {
+        width: 7px;
+        height: 7px;
+
+        background: var(--green);
+        border-radius: 50%;
+
+        box-shadow: 0 0 12px var(--green);
+
+        animation: pulse 2s infinite;
+    }
+
+    .hero h1 {
+        font-size: clamp(48px, 6vw, 78px);
+        font-weight: 800;
+
+        letter-spacing: -5px;
+        line-height: 1.08;
+
+        margin-bottom: 25px;
+    }
+
+    .hero h1 .highlight {
+        color: var(--green);
+    }
+
+    .hero-description {
+        max-width: 470px;
+
+        color: var(--muted);
+
+        font-size: 14px;
+        line-height: 2;
+
+        margin-bottom: 35px;
+    }
+
+    .btn-primary-custom {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+
+        background: var(--green);
+        color: #080b0a;
+
+        border: 1px solid var(--green);
+        border-radius: 6px;
+
+        padding: 15px 22px;
+
+        font-size: 12px;
+        font-weight: 700;
+
+        transition: 0.3s;
+    }
+
+    .btn-primary-custom:hover {
+        background: #c1ff9b;
+        color: #080b0a;
+
+        transform: translateY(-3px);
+
+        box-shadow: 0 8px 35px rgba(163,255,104,0.13);
+    }
+
+    .btn-secondary-custom {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+
+        color: var(--text);
+
+        border: 1px solid var(--border);
+        border-radius: 6px;
+
+        padding: 15px 22px;
+
+        font-size: 12px;
+
+        margin-left: 10px;
+
+        transition: 0.3s;
+    }
+
+    .btn-secondary-custom:hover {
+        color: var(--green);
+        border-color: rgba(163,255,104,0.35);
+    }
+
+
+    /* =====================================
+       TERMINAL VISUAL
+    ===================================== */
+
+    .terminal-wrapper {
+        position: relative;
+        padding: 15px;
+
+        animation: float 6s ease-in-out infinite;
+    }
+
+    .terminal-glow {
+        position: absolute;
+        inset: 15%;
+
+        background: rgba(120,255,90,0.09);
+        filter: blur(80px);
+
+        z-index: -1;
+    }
+
+    .terminal {
+        background: rgba(13,18,14,0.95);
+
+        border: 1px solid rgba(163,255,104,0.16);
+        border-radius: 12px;
+
+        overflow: hidden;
+
+        box-shadow:
+            0 25px 80px rgba(0,0,0,0.4),
+            0 0 40px rgba(163,255,104,0.025);
+    }
+
+    .terminal-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        padding: 15px 20px;
+
+        background: rgba(255,255,255,0.025);
+        border-bottom: 1px solid var(--border);
+    }
+
+    .terminal-dots {
+        display: flex;
+        gap: 6px;
+    }
+
+    .terminal-dots span {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+
+        background: #384139;
+    }
+
+    .terminal-dots span:first-child {
+        background: #ff6b6b;
+    }
+
+    .terminal-dots span:nth-child(2) {
+        background: #ffc857;
+    }
+
+    .terminal-dots span:nth-child(3) {
+        background: #a3ff68;
+    }
+
+    .terminal-title {
+        font-family: var(--mono);
+        color: #778078;
+        font-size: 10px;
+    }
+
+    .terminal-body {
+        padding: 28px 25px;
+
+        font-family: var(--mono);
+        font-size: 11px;
+        line-height: 2.3;
+    }
+
+    .terminal-line {
+        color: #88938b;
+    }
+
+    .terminal-prompt {
+        color: var(--green);
+    }
+
+    .terminal-command {
+        color: #f0f5ef;
+    }
+
+    .terminal-comment {
+        color: #5d6a60;
+    }
+
+    .terminal-output {
+        color: #9da99f;
+        padding-left: 15px;
+    }
+
+    .terminal-highlight {
+        color: var(--green);
+    }
+
+    .terminal-divider {
+        border: 0;
+        border-top: 1px solid var(--border);
+        margin: 18px 0;
+    }
+
+    .terminal-footer {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 10px;
+
+        padding: 13px 20px;
+
+        background: rgba(255,255,255,0.02);
+        border-top: 1px solid var(--border);
+
+        color: #778078;
+
+        font-family: var(--mono);
+        font-size: 9px;
+    }
+
+    .terminal-status {
+        color: var(--green);
+    }
+
+    .cursor {
+        display: inline-block;
+
+        width: 6px;
+        height: 12px;
+
+        background: var(--green);
+
+        vertical-align: middle;
+
+        animation: blink 1s step-end infinite;
+    }
+
+    .hero-bottom {
+        position: absolute;
+
+        bottom: 30px;
+        left: 0;
+        right: 0;
+
+        color: #667067;
+
+        font-family: var(--mono);
+        font-size: 9px;
+
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+    }
+
+
+    /* =====================================
+       GENERAL SECTION
+    ===================================== */
+
+    .section {
+        padding: 110px 0;
+        position: relative;
+    }
+
+    .section-label {
+        color: var(--green);
+
+        font-family: var(--mono);
+        font-size: 10px;
+
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+
+        margin-bottom: 20px;
+    }
+
+    .section-title {
+        font-size: clamp(30px, 4vw, 46px);
+        font-weight: 700;
+
+        letter-spacing: -2px;
+        line-height: 1.2;
+
+        margin-bottom: 20px;
+    }
+
+    .section-description {
+        color: var(--muted);
+
+        font-size: 13px;
+        line-height: 2;
+
+        max-width: 520px;
+    }
+
+
+    /* =====================================
+       ABOUT
+    ===================================== */
+
+    .about-card {
+        background: linear-gradient(
+            145deg,
+            rgba(20,28,22,0.9),
+            rgba(12,16,13,0.9)
+        );
+
+        border: 1px solid var(--border);
+        border-radius: 12px;
+
+        padding: 38px;
+
+        height: 100%;
+
+        transition: 0.3s;
+    }
+
+    .about-card:hover {
+        border-color: rgba(163,255,104,0.2);
+    }
+
+    .about-icon {
+        width: 48px;
+        height: 48px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        color: var(--green);
+
+        background: rgba(163,255,104,0.07);
+        border: 1px solid rgba(163,255,104,0.1);
+
+        border-radius: 10px;
+
+        font-size: 22px;
+
+        margin-bottom: 25px;
+    }
+
+    .about-card h3 {
+        font-size: 20px;
+        font-weight: 600;
+
+        margin-bottom: 18px;
+    }
+
+    .about-card p {
+        color: var(--muted);
+
+        font-size: 12px;
+        line-height: 2.1;
+
+        margin: 0;
+    }
+
+    .about-meta {
+        display: flex;
+        gap: 25px;
+        flex-wrap: wrap;
+
+        margin-top: 25px;
+        padding-top: 20px;
+
+        border-top: 1px solid var(--border);
+    }
+
+    .about-meta span {
+        color: #8b968e;
+        font-family: var(--mono);
+        font-size: 10px;
+    }
+
+    .about-meta i {
+        color: var(--green);
+        margin-right: 6px;
+    }
+
+
+    /* =====================================
+       PROJECTS
+    ===================================== */
+
+    .projects-section {
+        background: var(--bg-secondary);
+
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+    }
+
+    .project-card {
+        position: relative;
+
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+
+        padding: 30px;
+
+        height: 100%;
+
+        overflow: hidden;
+
+        transition: 0.35s;
+    }
+
+    .project-card::before {
+        content: "";
+
+        position: absolute;
+
+        top: 0;
+        left: 0;
+
+        width: 0;
+        height: 2px;
+
+        background: var(--green);
+
+        transition: 0.35s;
+    }
+
+    .project-card:hover {
+        transform: translateY(-6px);
+
+        border-color: rgba(163,255,104,0.2);
+
+        background: #131a15;
+    }
+
+    .project-card:hover::before {
+        width: 100%;
+    }
+
+    .project-number {
+        position: absolute;
+
+        top: 25px;
+        right: 25px;
+
+        color: #3f4941;
+
+        font-family: var(--mono);
+        font-size: 10px;
+    }
+
+    .project-icon {
+        width: 48px;
+        height: 48px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        color: var(--green);
+
+        background: rgba(163,255,104,0.07);
+        border: 1px solid rgba(163,255,104,0.1);
+
+        border-radius: 10px;
+
+        font-size: 21px;
+
+        margin-bottom: 25px;
+    }
+
+    .project-card h4 {
+        font-size: 16px;
+        font-weight: 600;
+
+        margin-bottom: 13px;
+    }
+
+    .project-card p {
+        color: var(--muted);
+
+        font-size: 12px;
+        line-height: 1.9;
+
+        margin-bottom: 25px;
+    }
+
+    .project-tag {
+        display: inline-block;
+
+        color: #91a08f;
+
+        background: rgba(255,255,255,0.035);
+        border: 1px solid var(--border);
+
+        border-radius: 4px;
+
+        padding: 5px 9px;
+
+        font-family: var(--mono);
+        font-size: 9px;
+    }
+
+    .project-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+
+        color: var(--green);
+
+        font-size: 11px;
+
+        margin-top: 18px;
+    }
+
+    .project-link i {
+        transition: 0.3s;
+    }
+
+    .project-link:hover i {
+        transform: translateX(5px);
+    }
+
+
+    /* =====================================
+       CONTACT
+    ===================================== */
+
+    .contact-box {
+        position: relative;
+        overflow: hidden;
+
+        text-align: center;
+
+        padding: 75px 30px;
+
+        background: linear-gradient(
+            120deg,
+            rgba(163,255,104,0.07),
+            rgba(163,255,104,0.01)
+        );
+
+        border: 1px solid rgba(163,255,104,0.14);
+        border-radius: 14px;
+    }
+
+    .contact-box::before {
+        content: "";
+
+        position: absolute;
+
+        width: 300px;
+        height: 300px;
+
+        top: -200px;
+        left: calc(50% - 150px);
+
+        background: rgba(163,255,104,0.12);
+        filter: blur(100px);
+
+        pointer-events: none;
+    }
+
+    .contact-box h2 {
+        font-size: clamp(28px, 4vw, 42px);
+        font-weight: 700;
+
+        letter-spacing: -2px;
+
+        margin-bottom: 20px;
+    }
+
+    .contact-box p {
+        color: var(--muted);
+
+        font-size: 13px;
+        line-height: 1.9;
+
+        margin-bottom: 30px;
+    }
+
+
+    /* =====================================
+       FOOTER
+    ===================================== */
+
+    footer {
+        padding: 28px 0;
+
+        background: #070908;
+        border-top: 1px solid var(--border);
+    }
+
+    .footer-brand {
+        color: white;
+
+        font-size: 19px;
+        font-weight: 800;
+
+        letter-spacing: -1px;
+    }
+
+    .footer-brand span {
+        color: var(--green);
+    }
+
+    .footer-text {
+        color: #6e786f;
+        font-size: 10px;
+    }
+
+    .footer-top {
+        color: #879187;
+        font-size: 12px;
+
+        transition: 0.3s;
+    }
+
+    .footer-top:hover {
+        color: var(--green);
+    }
+
+
+    /* =====================================
+       SCROLL ANIMATION
+    ===================================== */
+
+    .reveal {
+        opacity: 0;
+        transform: translateY(25px);
+
+        transition:
+            opacity 0.7s ease,
+            transform 0.7s ease;
+    }
+
+    .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+
+    /* =====================================
+       KEYFRAMES
+    ===================================== */
+
+    @keyframes pulse {
+        0%, 100% {
+            opacity: 1;
+            box-shadow: 0 0 10px var(--green);
+        }
+
+        50% {
+            opacity: 0.4;
+            box-shadow: 0 0 2px var(--green);
+        }
+    }
+
+    @keyframes blink {
+        50% {
+            opacity: 0;
+        }
+    }
+
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+
+    @keyframes glowPulse {
+        from {
+            opacity: 0.5;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+
+    /* =====================================
+       RESPONSIVE
+    ===================================== */
+
+    @media (max-width: 991px) {
+
+        .hero-content {
+            padding-top: 140px;
+        }
+
+        .hero h1 {
+            letter-spacing: -3px;
+        }
+
+        .terminal-wrapper {
+            margin-top: 50px;
+        }
+
+        .navbar-collapse {
+            padding-top: 15px;
+        }
+
+        .nav-link {
+            margin: 8px 0;
+        }
+
+        .nav-contact {
+            margin: 10px 0;
+        }
+
+        .hero-bottom {
+            display: none;
+        }
+    }
+
+    @media (max-width: 576px) {
+
+        .hero h1 {
+            font-size: 48px;
+            letter-spacing: -2.5px;
+        }
+
+        .hero-description {
+            font-size: 13px;
+        }
+
+        .btn-primary-custom,
+        .btn-secondary-custom {
+            padding: 13px 15px;
+            font-size: 11px;
+        }
+
+        .btn-secondary-custom {
+            margin-left: 5px;
+        }
+
+        .section {
+            padding: 75px 0;
+        }
+
+        .about-card {
+            padding: 28px;
+        }
+
+        .terminal-body {
+            padding: 20px 15px;
+            font-size: 9px;
+        }
+
+        .terminal-header {
+            padding: 13px 15px;
+        }
+
+        .terminal-footer {
+            font-size: 8px;
+        }
+
+        .contact-box {
+            padding: 50px 20px;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            scroll-behavior: auto !important;
+            transition-duration: 0.01ms !important;
+        }
+
+        .reveal {
+            opacity: 1;
+            transform: none;
+        }
+    }
+
+</style>
+
+</head>
+
+<body>
+
+<!-- =====================================
+     NAVBAR
+===================================== -->
+
+<nav class="navbar navbar-expand-lg fixed-top">
+
+<div class="container">
+
+    <a class="navbar-brand" href="#home">
+        NAS<span>Lab</span>.
+    </a>
+
+    <button class="navbar-toggler bg-light"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-label="Toggle navigation">
+
+        <span class="navbar-toggler-icon"></span>
+
+    </button>
+
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+
+            <li class="nav-item">
+                <a class="nav-link" href="#home">Home</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#about">About</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#projects">Projects</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#contact">Contact</a>
+            </li>
+
+            <li class="nav-item">
+
+                <a href="#contact" class="nav-contact">
+
+                    Let's Connect
+
+                    <i class="bi bi-arrow-up-right"></i>
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </div>
+
+</div>
+
+</nav>
+
+
+
+<!-- =====================================
+     HERO
+===================================== -->
+
+<section class="hero" id="home">
+
+<div class="container hero-content">
+
+    <div class="row align-items-center g-5">
+
+
+        <!-- HERO LEFT -->
+
+        <div class="col-lg-6">
+
+            <div class="hero-badge">
+
+                <span class="pulse-dot"></span>
+
+                A LITTLE SPACE ON THE INTERNET
+
+            </div>
+
+
+            <h1>
+
+                Build.<br>
+
+                Explore.<br>
+
+                <span class="highlight">Repeat.</span>
+
+            </h1>
+
+
+            <p class="hero-description">
+
+                Welcome to NASLab — a personal corner of the
+                internet for ideas, experiments, projects
+                and everything worth exploring.
+
+                A space to learn, create and see
+                where curiosity leads.
+
+            </p>
+
+
+            <div class="d-flex flex-wrap gap-2">
+
+                <a href="#projects" class="btn-primary-custom">
+
+                    Explore Projects
+
+                    <i class="bi bi-arrow-up-right"></i>
+
+                </a>
+
+
+                <a href="#about" class="btn-secondary-custom">
+
+                    Discover NASLab
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- HERO RIGHT / TERMINAL -->
+
+        <div class="col-lg-6">
+
+            <div class="terminal-wrapper">
+
+                <div class="terminal-glow"></div>
+
+
+                <div class="terminal">
+
+
+                    <!-- Terminal Header -->
+
+                    <div class="terminal-header">
+
+                        <div class="terminal-dots">
+
+                            <span></span>
+                            <span></span>
+                            <span></span>
+
+                        </div>
+
+                        <div class="terminal-title">
+
+                            naslab@personal-space
+
+                        </div>
+
+                        <i class="bi bi-three-dots"
+                           style="color:#687269"></i>
+
+                    </div>
+
+
+
+                    <!-- Terminal Body -->
+
+                    <div class="terminal-body">
+
+
+                        <div class="terminal-line">
+
+                            <span class="terminal-prompt">nas@naslab</span>:
+
+                            <span style="color:#6d796f">~</span>
+
+                            $
+
+                            <span class="terminal-command">
+                                welcome
+                            </span>
+
+                        </div>
+
+
+                        <div class="terminal-output">
+
+                            Initializing NASLab...
+
+                        </div>
+
+
+                        <div class="terminal-output">
+
+                            Loading personal workspace
+
+                        </div>
+
+
+                        <br>
+
+
+                        <div class="terminal-line">
+
+                            <span class="terminal-prompt">nas@naslab</span>:
+
+                            <span style="color:#6d796f">~</span>
+
+                            $
+
+                            <span class="terminal-command">
+                                about --me
+                            </span>
+
+                        </div>
+
+
+                        <div class="terminal-output">
+
+                            Name&nbsp;&nbsp;&nbsp;&nbsp;:
+
+                            <span class="terminal-highlight">
+                                NASLab
+                            </span>
+
+                        </div>
+
+
+                        <div class="terminal-output">
+
+                            Type&nbsp;&nbsp;&nbsp;&nbsp;:
+
+                            Personal Website
+
+                        </div>
+
+
+                        <div class="terminal-output">
+
+                            Status&nbsp;&nbsp;:
+
+                            <span class="terminal-highlight">
+                                Exploring
+                            </span>
+
+                        </div>
+
+
+                        <br>
+
+
+                        <div class="terminal-line">
+
+                            <span class="terminal-prompt">nas@naslab</span>:
+
+                            <span style="color:#6d796f">~</span>
+
+                            $
+
+                            <span class="terminal-command">
+                                date --local
+                            </span>
+
+                        </div>
+
+
+                        <div class="terminal-output">
+
+                            MYT&nbsp;&nbsp;&nbsp;&nbsp;:
+
+                            <span id="myClock" class="terminal-highlight">
+                                Loading...
+                            </span>
+
+                        </div>
+
+
+                        <div class="terminal-output">
+
+                            Date&nbsp;&nbsp;&nbsp;:
+
+                            <span id="myDate" class="terminal-highlight">
+                                Loading...
+                            </span>
+
+                        </div>
+
+
+                        <br>
+
+
+                        <div class="terminal-line">
+
+                            <span class="terminal-prompt">nas@naslab</span>:
+
+                            <span style="color:#6d796f">~</span>
+
+                            $
+
+                            <span class="terminal-command">
+
+                                <span class="cursor"></span>
+
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- Terminal Footer -->
+
+                    <div class="terminal-footer">
+
+                        <span>
+
+                            <i class="bi bi-circle-fill terminal-status"
+                               style="font-size:6px"></i>
+
+                            &nbsp; ALL SYSTEMS NORMAL
+
+                        </span>
+
+
+                        <span>
+
+                            NASLAB / 2026
+
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- Hero Bottom -->
+
+<div class="hero-bottom">
+
+    <div class="container d-flex justify-content-between">
+
+        <span>Independent · Curious · Always Learning</span>
+
+        <span>Scroll to explore ↓</span>
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================
+     ABOUT
+===================================== -->
+
+<section class="section" id="about">
+
+<div class="container">
+
+    <div class="row align-items-center g-5">
+
+
+        <div class="col-lg-5 reveal">
+
+            <div class="section-label">
+
+                01 / ABOUT
+
+            </div>
+
+
+            <h2 class="section-title">
+
+                A little space<br>
+
+                of my own.
+
+            </h2>
+
+
+            <p class="section-description">
+
+                Not everything needs a purpose.
+
+                Sometimes, it's just about trying something
+                new, learning along the way, and enjoying
+                the process.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="col-lg-7 reveal">
+
+            <div class="about-card">
+
+
+                <div class="about-icon">
+
+                    <i class="bi bi-asterisk"></i>
+
+                </div>
+
+
+                <h3>
+
+                    Welcome to NASLab.
+
+                </h3>
+
+
+                <p>
+
+                    NASLab is a personal space built around
+                    curiosity and creativity.
+
+                    A place to experiment with ideas,
+                    keep track of interesting projects,
+                    and document the things I learn
+                    along the way.
+
+                    <br><br>
+
+                    No big agenda. Just a space to build,
+                    explore, and make things happen.
+
+                </p>
+
+
+                <div class="about-meta">
+
+                    <span>
+
+                        <i class="bi bi-check-circle"></i>
+
+                        Personal Space
+
+                    </span>
+
+
+                    <span>
+
+                        <i class="bi bi-check-circle"></i>
+
+                        Est. 2026
+
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================
+     PROJECTS
+===================================== -->
+
+<section class="section projects-section" id="projects">
+
+<div class="container">
+
+
+    <div class="reveal">
+
+        <div class="section-label">
+
+            02 / EXPLORE
+
+        </div>
+
+
+        <h2 class="section-title">
+
+            Things I'm working on.
+
+        </h2>
+
+
+        <p class="section-description mb-5">
+
+            A collection of projects, ideas and things
+            I'm exploring.
+
+            More to come.
+
+        </p>
+
+    </div>
+
+
+
+    <div class="row g-4">
+
+
+        <!-- PROJECT 01 -->
+
+        <div class="col-md-6 col-lg-4 reveal">
+
+            <div class="project-card">
+
+                <span class="project-number">
+
+                    01
+
+                </span>
+
+
+                <div class="project-icon">
+
+                    <i class="bi bi-window"></i>
+
+                </div>
+
+
+                <h4>
+
+                    Personal Projects
+
+                </h4>
+
+
+                <p>
+
+                    Small ideas, experiments and personal
+                    projects built along the way.
+
+                </p>
+
+
+                <span class="project-tag">
+
+                    PROJECTS
+
+                </span>
+
+
+                <div>
+
+                    <a href="#contact" class="project-link">
+
+                        Coming Soon
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PROJECT 02 -->
+
+        <div class="col-md-6 col-lg-4 reveal">
+
+            <div class="project-card">
+
+                <span class="project-number">
+
+                    02
+
+                </span>
+
+
+                <div class="project-icon">
+
+                    <i class="bi bi-journal-text"></i>
+
+                </div>
+
+
+                <h4>
+
+                    Notes & Ideas
+
+                </h4>
+
+
+                <p>
+
+                    Interesting discoveries, useful notes
+                    and things worth remembering.
+
+                </p>
+
+
+                <span class="project-tag">
+
+                    JOURNAL
+
+                </span>
+
+
+                <div>
+
+                    <a href="#contact" class="project-link">
+
+                        Coming Soon
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PROJECT 03 -->
+
+        <div class="col-md-6 col-lg-4 reveal">
+
+            <div class="project-card">
+
+                <span class="project-number">
+
+                    03
+
+                </span>
+
+
+                <div class="project-icon">
+
+                    <i class="bi bi-compass"></i>
+
+                </div>
+
+
+                <h4>
+
+                    Experiments
+
+                </h4>
+
+
+                <p>
+
+                    Exploring new ideas, learning new skills
+                    and seeing where curiosity leads.
+
+                </p>
+
+
+                <span class="project-tag">
+
+                    EXPLORATION
+
+                </span>
+
+
+                <div>
+
+                    <a href="#contact" class="project-link">
+
+                        Coming Soon
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================
+     CONTACT
+===================================== -->
+
+<section class="section" id="contact">
+
+<div class="container">
+
+    <div class="contact-box reveal">
+
+
+        <div class="section-label">
+
+            03 / GET IN TOUCH
+
+        </div>
+
+
+        <h2>
+
+            Every idea starts somewhere.
+
+        </h2>
+
+
+        <p>
+
+            Thanks for stopping by NASLab.
+
+            <br>
+
+            This is just the beginning.
+
+        </p>
+
+
+        <a href="#home" class="btn-primary-custom">
+
+            Back to Top
+
+            <i class="bi bi-arrow-up"></i>
+
+        </a>
+
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================
+     FOOTER
+===================================== -->
+
+<footer>
+
+<div class="container">
+
+    <div class="d-flex justify-content-between
+                align-items-center flex-wrap gap-3">
+
+
+        <a href="#home" class="footer-brand">
+
+            NAS<span>Lab</span>.
+
+        </a>
+
+
+        <div class="footer-text">
+
+            &copy; <span id="year"></span> NASLab.
+
+            Built with curiosity.
+
+        </div>
+
+
+        <a href="#home" class="footer-top">
+
+            Back to top ↑
+
+        </a>
+
+
+    </div>
+
+</div>
+
+</footer>
+
+
+
+<!-- =====================================
+     JAVASCRIPT
+===================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+<script>
+
+    // =====================================
+    // MALAYSIA CLOCK (MYT)
+    // =====================================
+
+    function updateClock() {
+
+        const now = new Date();
+
+        const timeOptions = {
+            timeZone: 'Asia/Kuala_Lumpur',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false
+        };
+
+        const dateOptions = {
+            timeZone: 'Asia/Kuala_Lumpur',
+            day: '2-digit',
+            month: 'short',
+            year: 'numeric'
+        };
+
+        const clockElement = document.getElementById('myClock');
+
+        const dateElement = document.getElementById('myDate');
+
+
+        if (clockElement) {
+
+            clockElement.textContent =
+                new Intl.DateTimeFormat('en-GB', timeOptions).format(now);
+
+        }
+
+
+        if (dateElement) {
+
+            dateElement.textContent =
+                new Intl.DateTimeFormat('en-GB', dateOptions).format(now);
+
+        }
+
+    }
+
+
+    updateClock();
+
+    setInterval(updateClock, 1000);
+
+
+
+    // =====================================
+    // AUTO COPYRIGHT YEAR
+    // =====================================
+
+    document.getElementById('year').textContent =
+        new Date().getFullYear();
+
+
+
+    // =====================================
+    // SCROLL REVEAL ANIMATION
+    // =====================================
+
+    const revealElements = document.querySelectorAll('.reveal');
+
+
+    if ('IntersectionObserver' in window) {
+
+        const observer = new IntersectionObserver((entries) => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.classList.add('visible');
+
+                    observer.unobserve(entry.target);
+
+                }
+
+            });
+
+        }, {
+            threshold: 0.12
+        });
+
+
+        revealElements.forEach(element => {
+
+            observer.observe(element);
+
+        });
+
+    } else {
+
+        revealElements.forEach(element => {
+
+            element.classList.add('visible');
+
+        });
+
+    }
+
+
+
+    // =====================================
+    // CLOSE MOBILE NAV AFTER CLICK
+    // =====================================
+
+    document.querySelectorAll('.navbar-nav .nav-link, .nav-contact')
+        .forEach(link => {
+
+            link.addEventListener('click', () => {
+
+                const navbar = document.getElementById('navbarNav');
+
+                if (navbar.classList.contains('show')) {
+
+                    bootstrap.Collapse
+                        .getOrCreateInstance(navbar)
+                        .hide();
+
+                }
+
+            });
+
+        });
+
+</script>
+
+</body>
+
+</html>

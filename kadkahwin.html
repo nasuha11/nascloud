@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kad Kahwin Custom — Pilih Design & Pakej | NasCloud</title>
+<meta name="description" content="Pilih design kad kahwin, pakej combo & add-on. Harga telus, order terus." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=Great+Vibes&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#faf7f2;
+    --cream-2:#f3ede3;
+    --ink:#1c1a17;
+    --muted:#7a736a;
+    --gold:#b8963f;
+    --gold-soft:#e5d4a8;
+    --emerald:#1f3a2e;
+    --blush:#f6e6e6;
+    --line:#e6ded2;
+    --radius:16px;
+    --shadow:0 10px 30px -12px rgba(28,26,23,.18);
+    --shadow-lg:0 24px 60px -20px rgba(28,26,23,.28);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(250,247,242,.88);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.3px}
+  .brand .mark{
+    width:34px;height:34px;border-radius:10px;
+    background:linear-gradient(135deg,var(--emerald),#2e5a47);
+    color:#fff;display:grid;place-items:center;
+    font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:700;
+  }
+  .brand small{display:block;font-size:10px;letter-spacing:2px;color:var(--muted);font-weight:500;text-transform:uppercase}
+  .nav-links{display:flex;gap:26px;font-size:14px;font-weight:500}
+  .nav-links a{color:var(--muted);text-decoration:none;transition:.2s}
+  .nav-links a:hover{color:var(--ink)}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:12px 22px;border-radius:999px;border:1px solid transparent;
+    font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;
+    transition:.22s;white-space:nowrap;font-family:inherit;
+  }
+  .btn-primary{background:var(--emerald);color:#fff}
+  .btn-primary:hover{background:#16291f;transform:translateY(-1px);box-shadow:var(--shadow)}
+  .btn-gold{background:var(--gold);color:#fff}
+  .btn-gold:hover{background:#a3842f;transform:translateY(-1px)}
+  .btn-ghost{background:transparent;border-color:var(--line);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+  .btn-sm{padding:9px 16px;font-size:13px}
+  .btn:disabled{opacity:.45;cursor:not-allowed;transform:none!important}
+
+  /* ---------- HERO ---------- */
+  .hero{padding:76px 0 60px;text-align:center;position:relative;overflow:hidden}
+  .hero::before{
+    content:"";position:absolute;inset:-40% 30% auto -10%;height:520px;
+    background:radial-gradient(circle,rgba(184,150,63,.13),transparent 65%);
+    pointer-events:none;
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:7px 16px;border-radius:999px;background:#fff;border:1px solid var(--line);
+    font-size:12px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;color:var(--gold);
+    margin-bottom:22px;
+  }
+  .hero h1{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(38px,6vw,66px);line-height:1.06;font-weight:700;letter-spacing:-.5px;
+    margin-bottom:18px;
+  }
+  .hero h1 em{font-style:italic;color:var(--gold)}
+  .hero p{max-width:600px;margin:0 auto 30px;color:var(--muted);font-size:17px}
+  .hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .hero-stats{display:flex;gap:44px;justify-content:center;margin-top:52px;flex-wrap:wrap}
+  .hero-stats div{text-align:center}
+  .hero-stats b{display:block;font-family:'Cormorant Garamond',serif;font-size:34px;color:var(--emerald);line-height:1}
+  .hero-stats span{font-size:12px;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);font-weight:500}
+
+  /* ---------- SECTION ---------- */
+  section{padding:74px 0}
+  .sec-head{margin-bottom:38px;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+  .sec-head h2{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,42px);font-weight:700;line-height:1.1;letter-spacing:-.3px}
+  .sec-head p{color:var(--muted);font-size:15px;margin-top:6px;max-width:520px}
+  .sec-tag{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:8px;display:block}
+
+  /* ---------- TOOLBAR ---------- */
+  .toolbar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:28px}
+  .search{
+    flex:1;min-width:220px;position:relative;
+  }
+  .search input{
+    width:100%;padding:12px 16px 12px 42px;border-radius:999px;border:1px solid var(--line);
+    background:#fff;font-family:inherit;font-size:14px;outline:none;transition:.2s;
+  }
+  .search input:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(184,150,63,.1)}
+  .search svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);opacity:.45}
+  .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{
+    padding:9px 17px;border-radius:999px;border:1px solid var(--line);background:#fff;
+    font-size:13px;font-weight:500;cursor:pointer;transition:.2s;color:var(--muted);font-family:inherit;
+  }
+  .chip:hover{border-color:var(--gold);color:var(--gold)}
+  .chip.active{background:var(--emerald);border-color:var(--emerald);color:#fff}
+
+  /* ---------- DESIGN GRID ---------- */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:24px}
+  .design{
+    background:#fff;border-radius:var(--radius);padding:14px;
+    border:1px solid var(--line);cursor:pointer;transition:.25s;position:relative;
+  }
+  .design:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg);border-color:var(--gold-soft)}
+  .design.selected{border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,150,63,.16)}
+
+  .card-preview{
+    aspect-ratio:5/7;border-radius:10px;position:relative;overflow:hidden;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:26px 20px;
+  }
+  .card-preview .orn{position:absolute;width:64px;height:64px;border:1px solid currentColor;opacity:.4}
+  .card-preview .orn.tl{top:14px;left:14px;border-right:0;border-bottom:0}
+  .card-preview .orn.br{bottom:14px;right:14px;border-left:0;border-top:0}
+  .card-preview .small{font-size:9px;letter-spacing:3px;text-transform:uppercase;opacity:.75;margin-bottom:14px}
+  .card-preview .couple{font-size:23px;line-height:1.2;margin-bottom:12px;font-weight:600}
+  .card-preview .divider{width:40px;height:1px;background:currentColor;opacity:.5;margin:0 auto 12px}
+  .card-preview .date{font-size:11px;letter-spacing:2px;opacity:.8}
+
+  /* themes */
+  .t-gold{background:#fdfbf6;color:#8a6d24;border:1px solid #e8d9b5}
+  .t-gold .couple{font-family:'Cormorant Garamond',serif}
+  .t-emerald{background:linear-gradient(160deg,#1f3a2e,#2c5241);color:#e5d4a8}
+  .t-emerald .couple{font-family:'Cormorant Garamond',serif}
+  .t-blush{background:linear-gradient(160deg,#fdf2f2,#f8e3e3);color:#9c5f66}
+  .t-blush .couple{font-family:'Great Vibes',cursive;font-size:30px;font-weight:400}
+  .t-minimal{background:#fff;color:#1c1a17;border:1px solid #eaeaea}
+  .t-minimal .couple{font-family:'Inter',sans-serif;font-weight:300;letter-spacing:6px;font-size:17px;text-transform:uppercase}
+  .t-minimal .small{letter-spacing:5px}
+  .t-rustic{background:#e8dcc8;color:#5a4632;border:1px solid #d3c3a7}
+  .t-rustic .couple{font-family:'Cormorant Garamond',serif}
+  .t-pastel{background:linear-gradient(150deg,#efe6fb,#fce7f3,#e0f2fe);color:#6b5b8a}
+  .t-pastel .couple{font-family:'Playfair Display',serif}
+  .t-mono{background:#1c1a17;color:#f3ede3}
+  .t-mono .couple{font-family:'Playfair Display',serif}
+  .t-tropical{background:linear-gradient(160deg,#eaf5ee,#d3e9dc);color:#2f6b4f}
+  .t-tropical .couple{font-family:'Cormorant Garamond',serif}
+
+  .design-meta{padding:14px 4px 4px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .design-meta h4{font-size:14px;font-weight:600}
+  .design-meta span{font-size:12px;color:var(--muted)}
+  .tick{
+    position:absolute;top:22px;right:22px;width:26px;height:26px;border-radius:50%;
+    background:var(--gold);color:#fff;display:none;place-items:center;font-size:14px;z-index:2;
+    box-shadow:0 4px 12px rgba(0,0,0,.2);
+  }
+  .design.selected .tick{display:grid}
+  .badge-pop{
+    position:absolute;top:22px;left:22px;z-index:2;
+    background:var(--gold);color:#fff;font-size:10px;font-weight:700;letter-spacing:1px;
+    padding:5px 11px;border-radius:999px;text-transform:uppercase;
+  }
+
+  /* ---------- PACKAGES ---------- */
+  .pkg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px;align-items:start}
+  .pkg{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:30px 26px;cursor:pointer;transition:.25s;position:relative;display:flex;flex-direction:column;
+  }
+  .pkg:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+  .pkg.selected{border-color:var(--emerald);box-shadow:0 0 0 3px rgba(31,58,46,.13)}
+  .pkg.popular{border-color:var(--gold);background:linear-gradient(180deg,#fffdf7,#fff)}
+  .pkg .ribbon{
+    position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+    background:var(--gold);color:#fff;font-size:11px;font-weight:700;letter-spacing:1.2px;
+    padding:6px 16px;border-radius:999px;text-transform:uppercase;white-space:nowrap;
+  }
+  .pkg h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;margin-bottom:4px}
+  .pkg .pcs{font-size:13px;color:var(--muted);margin-bottom:18px}
+  .pkg .price{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:700;color:var(--emerald);line-height:1}
+  .pkg .price sup{font-size:18px;top:-14px;position:relative;margin-right:2px}
+  .pkg .strike{font-size:14px;color:var(--muted);text-decoration:line-through;margin-left:8px;font-family:'Inter',sans-serif;font-weight:400}
+  .pkg ul{list-style:none;margin:22px 0;display:flex;flex-direction:column;gap:11px;flex:1}
+  .pkg li{font-size:13.5px;color:#443f38;display:flex;gap:10px;align-items:flex-start}
+  .pkg li::before{content:"✓";color:var(--gold);font-weight:700;flex-shrink:0}
+  .pkg li.off{opacity:.4}
+  .pkg li.off::before{content:"—";color:var(--muted)}
+
+  /* ---------- ADDONS ---------- */
+  .addons{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+  .addon{
+    display:flex;gap:14px;align-items:center;background:#fff;border:1px solid var(--line);
+    border-radius:14px;padding:18px;cursor:pointer;transition:.2s;
+  }
+  .addon:hover{border-color:var(--gold-soft)}
+  .addon.on{border-color:var(--gold);background:#fffdf7}
+  .addon input{display:none}
+  .box{
+    width:22px;height:22px;border-radius:6px;border:1.5px solid var(--line);
+    display:grid;place-items:center;flex-shrink:0;transition:.2s;color:#fff;font-size:13px;
+  }
+  .addon.on .box{background:var(--gold);border-color:var(--gold)}
+  .addon-info{flex:1}
+  .addon-info b{display:block;font-size:14px;font-weight:600}
+  .addon-info small{color:var(--muted);font-size:12.5px}
+  .addon .amt{font-weight:600;font-size:14px;color:var(--emerald);white-space:nowrap}
+
+  /* ---------- ORDER ---------- */
+  .order-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:28px;align-items:start}
+  .summary{
+    background:var(--emerald);color:#f3ede3;border-radius:var(--radius);padding:32px;
+    position:sticky;top:92px;
+  }
+  .summary h3{font-family:'Cormorant Garamond',serif;font-size:26px;color:#fff;margin-bottom:20px}
+  .sum-row{display:flex;justify-content:space-between;gap:16px;padding:11px 0;font-size:14px;border-bottom:1px solid rgba(255,255,255,.1)}
+  .sum-row span:last-child{font-weight:600;color:#fff;text-align:right}
+  .sum-row.muted span{color:rgba(243,237,227,.6);font-size:13px}
+  .sum-total{
+    display:flex;justify-content:space-between;align-items:baseline;
+    margin-top:22px;padding-top:20px;border-top:2px solid rgba(229,212,168,.35);
+  }
+  .sum-total span{font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-soft)}
+  .sum-total b{font-family:'Cormorant Garamond',serif;font-size:38px;color:#fff;line-height:1}
+  .empty-note{font-size:13.5px;color:rgba(243,237,227,.65);padding:8px 0}
+  .summary .btn{width:100%;margin-top:22px}
+  .summary .btn-wa{background:#25D366;color:#fff}
+  .summary .btn-wa:hover{background:#1eb955}
+  .summary .btn:disabled{background:rgba(255,255,255,.15);color:rgba(255,255,255,.5)}
+
+  .form-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:32px}
+  .form-card h3{font-family:'Cormorant Garamond',serif;font-size:26px;margin-bottom:22px}
+  .field{margin-bottom:16px}
+  .field label{display:block;font-size:13px;font-weight:600;margin-bottom:7px}
+  .field input,.field textarea,.field select{
+    width:100%;padding:13px 15px;border-radius:11px;border:1px solid var(--line);
+    font-family:inherit;font-size:14px;outline:none;transition:.2s;background:var(--cream);
+  }
+  .field input:focus,.field textarea:focus,.field select:focus{
+    border-color:var(--gold);background:#fff;box-shadow:0 0 0 4px rgba(184,150,63,.1);
+  }
+  .field textarea{resize:vertical;min-height:90px}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+  /* ---------- HOW ---------- */
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:22px}
+  .step{text-align:center;padding:8px}
+  .step .num{
+    width:52px;height:52px;border-radius:50%;background:#fff;border:1px solid var(--line);
+    display:grid;place-items:center;margin:0 auto 16px;
+    font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--gold);
+  }
+  .step h4{font-size:15px;margin-bottom:6px}
+  .step p{font-size:13.5px;color:var(--muted)}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink);color:#a9a29a;padding:56px 0 30px;margin-top:40px}
+  .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:40px}
+  footer h5{color:#fff;font-size:14px;margin-bottom:14px;letter-spacing:.5px}
+  footer a{color:#a9a29a;text-decoration:none;font-size:13.5px;display:block;padding:5px 0;transition:.2s}
+  footer a:hover{color:var(--gold)}
+  footer p{font-size:13.5px;max-width:320px}
+  .foot-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:24px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12.5px}
+
+  /* ---------- TOAST ---------- */
+  .toast{
+    position:fixed;bottom:26px;left:50%;transform:translate(-50%,120%);
+    background:var(--ink);color:#fff;padding:14px 26px;border-radius:999px;
+    font-size:14px;font-weight:500;z-index:200;transition:.35s cubic-bezier(.2,.8,.2,1);
+    box-shadow:var(--shadow-lg);
+  }
+  .toast.show{transform:translate(-50%,0)}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:900px){
+    .order-grid{grid-template-columns:1fr}
+    .summary{position:static}
+    .foot-grid{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:680px){
+    .nav-links{display:none}
+    .hero{padding:52px 0 40px}
+    .hero-stats{gap:28px;margin-top:38px}
+    section{padding:52px 0}
+    .grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px}
+    .card-preview .couple{font-size:18px}
+    .t-blush .couple{font-size:22px}
+    .design{padding:10px}
+    .foot-grid{grid-template-columns:1fr}
+    .field-row{grid-template-columns:1fr}
+    .summary,.form-card{padding:24px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <div class="brand">
+      <div class="mark">N</div>
+      <div>NasCloud <small>Kad Kahwin</small></div>
+    </div>
+    <nav class="nav-links">
+      <a href="#design">Design</a>
+      <a href="#pakej">Pakej</a>
+      <a href="#addon">Add-on</a>
+      <a href="#order">Order</a>
+    </nav>
+    <a href="#order" class="btn btn-primary btn-sm">Mula Pilih →</a>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">✦ Cetakan Premium · Siap 5–7 Hari</div>
+    <h1>Kad kahwin yang <em>cantik</em>,<br/>harga yang telus.</h1>
+    <p>Pilih design, pilih pakej, tambah add-on — harga auto kira. Terus order, tak payah tanya-tanya dulu.</p>
+    <div class="hero-actions">
+      <a href="#design" class="btn btn-primary">Lihat Design</a>
+      <a href="#pakej" class="btn btn-ghost">Banding Pakej</a>
+    </div>
+    <div class="hero-stats">
+      <div><b>8+</b><span>Design</span></div>
+      <div><b>4</b><span>Pakej Combo</span></div>
+      <div><b>2.5k+</b><span>Pasangan</span></div>
+      <div><b>5–7</b><span>Hari Siap</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DESIGNS ================= -->
+<section id="design">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="sec-tag">Langkah 1</span>
+        <h2>Pilih Design Kad</h2>
+        <p>Klik untuk pilih. Boleh pilih lebih dari satu — bergantung pada pakej.</p>
+      </div>
+      <div class="chips" id="chips"></div>
+    </div>
+
+    <div class="toolbar">
+      <div class="search">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="text" id="search" placeholder="Cari design... (contoh: floral, gold, minimal)" />
+      </div>
+    </div>
+
+    <div class="grid" id="designGrid"></div>
+  </div>
+</section>
+
+<!-- ================= PACKAGES ================= -->
+<section id="pakej" style="background:var(--cream-2)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="sec-tag">Langkah 2</span>
+        <h2>Pilih Pakej / Combo</h2>
+        <p>Semua pakej termasuk cetakan premium + envelope percuma + penghantaran.</p>
+      </div>
+    </div>
+    <div class="pkg-grid" id="pkgGrid"></div>
+  </div>
+</section>
+
+<!-- ================= ADD-ONS ================= -->
+<section id="addon">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="sec-tag">Langkah 3</span>
+        <h2>Tambah Add-on (Pilihan)</h2>
+        <p>Upgrade sikit untuk hasil yang lebih mewah.</p>
+      </div>
+    </div>
+    <div class="addons" id="addonGrid"></div>
+  </div>
+</section>
+
+<!-- ================= ORDER ================= -->
+<section id="order" style="background:var(--cream-2)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="sec-tag">Langkah 4</span>
+        <h2>Semak & Order</h2>
+        <p>Harga auto kira. Tekan butang WhatsApp untuk hantar pesanan.</p>
+      </div>
+    </div>
+
+    <div class="order-grid">
+      <!-- SUMMARY -->
+      <div class="summary">
+        <h3>Ringkasan Pesanan</h3>
+        <div id="sumBody"></div>
+
+        <div class="sum-total">
+          <span>Jumlah</span>
+          <b id="sumTotal">RM0</b>
+        </div>
+
+        <button class="btn btn-wa" id="waBtn" disabled>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.5-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.6-1.5-.9-2.1-.2-.5-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.4 1.3 4.9L2 22l5.3-1.4c1.4.8 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
+          Hantar Pesanan
+        </button>
+        <button class="btn btn-ghost btn-sm" id="resetBtn" style="width:100%;margin-top:10px;color:#f3ede3;border-color:rgba(255,255,255,.2)">Reset Pilihan</button>
+      </div>
+
+      <!-- FORM -->
+      <div class="form-card">
+        <h3>Maklumat Anda</h3>
+        <div class="field-row">
+          <div class="field">
+            <label>Nama Penuh</label>
+            <input type="text" id="fName" placeholder="Ahmad bin Ali" />
+          </div>
+          <div class="field">
+            <label>No. Telefon</label>
+            <input type="tel" id="fPhone" placeholder="0123456789" />
+          </div>
+        </div>
+        <div class="field">
+          <label>Tarikh Majlis (anggaran)</label>
+          <input type="date" id="fDate" />
+        </div>
+        <div class="field">
+          <label>Alamat Penghantaran</label>
+          <textarea id="fAddr" placeholder="No, jalan, poskod, bandar, negeri"></textarea>
+        </div>
+        <div class="field">
+          <label>Nota Tambahan</label>
+          <textarea id="fNote" placeholder="Contoh: nak nama pasangan 'Aiman & Aisyah', warna tema emerald, dll."></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOW ================= -->
+<section>
+  <div class="wrap">
+    <div class="sec-head" style="justify-content:center;text-align:center">
+      <div style="margin:0 auto">
+        <span class="sec-tag">Proses</span>
+        <h2>Macam Mana Ia Berfungsi</h2>
+      </div>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><h4>Pilih Design</h4><p>Pilih 1 atau lebih design yang anda suka.</p></div>
+      <div class="step"><div class="num">2</div><h4>Pilih Pakej</h4><p>Tentukan kuantiti & combo yang sesuai.</p></div>
+      <div class="step"><div class="num">3</div><h4>Hantar Order</h4><p>Terus ke WhatsApp kami dengan ringkasan lengkap.</p></div>
+      <div class="step"><div class="num">4</div><h4>Semak & Cetak</h4><p>Kami hantar preview, anda approve, kami cetak.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="brand" style="color:#fff;margin-bottom:14px">
+          <div class="mark">N</div>
+          <div>NasCloud <small style="color:#8a837b">Kad Kahwin</small></div>
+        </div>
+        <p>Cetakan kad kahwin premium dengan harga telus. Design moden, klasik & minimalis.</p>
+      </div>
+      <div>
+        <h5>Navigasi</h5>
+        <a href="#design">Design</a>
+        <a href="#pakej">Pakej</a>
+        <a href="#addon">Add-on</a>
+        <a href="#order">Order</a>
+      </div>
+      <div>
+        <h5>Hubungi</h5>
+        <a href="#" id="footWa">WhatsApp</a>
+        <a href="mailto:hello@nascloud.lol">hello@nascloud.lol</a>
+        <a href="https://nascloud.lol">nascloud.lol</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="yr"></span> NasCloud. Hak cipta terpelihara.</span>
+      <span>Dibina dengan ♥ untuk pasangan bahagia</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ==========================================================
+   KONFIGURASI — TUKAR NO WHATSAPP DI SINI
+   ========================================================== */
+const WA_NUMBER = "60123456789"; // <-- format: 60 + nombor tanpa 0
+
+/* ==========================================================
+   DATA DESIGN
+   ========================================================== */
+const DESIGNS = [
+  { id:"d1", name:"Aurora Gold",    cat:"Klasik",    theme:"t-gold",    popular:true  },
+  { id:"d2", name:"Emerald Royale", cat:"Klasik",    theme:"t-emerald", popular:false },
+  { id:"d3", name:"Blush Romance",  cat:"Floral",    theme:"t-blush",   popular:true  },
+  { id:"d4", name:"Pure Minimal",   cat:"Minimalis", theme:"t-minimal", popular:false },
+  { id:"d5", name:"Rustic Kraft",   cat:"Klasik",    theme:"t-rustic",  popular:false },
+  { id:"d6", name:"Pastel Dream",   cat:"Floral",    theme:"t-pastel",  popular:false },
+  { id:"d7", name:"Noir Elegance",  cat:"Moden",     theme:"t-mono",    popular:true  },
+  { id:"d8", name:"Tropical Sage",  cat:"Moden",     theme:"t-tropical",popular:false },
+];
+
+const COUPLE = "Aiman & Aisyah";
+
+/* ==========================================================
+   DATA PAKEJ
+   ========================================================== */
+const PACKAGES = [
+  {
+    id:"p1", name:"Pakej Asas", pcs:"100 keping", price:150, strike:180, designs:1,
+    features:["100 kad + envelope","1 design pilihan","Cetakan premium 250gsm","Penghantaran percuma","Siap 5–7 hari"]
+  },
+  {
+    id:"p2", name:"Combo A", pcs:"300 keping", price:380, strike:450, designs:2,
+    features:["300 kad + envelope","2 design pilihan","Cetakan premium 250gsm","Nama pasangan custom","Penghantaran percuma","Siap 5–7 hari"]
+  },
+  {
+    id:"p3", name:"Combo B", pcs:"500 keping", price:580, strike:720, designs:3, popular:true,
+    features:["500 kad + envelope","3 design pilihan","Cetakan premium 300gsm","Gold foil percuma","Kotak eksklusif","Penghantaran percuma","Siap 5–7 hari"]
+  },
+  {
+    id:"p4", name:"Premium", pcs:"1,000 keping", price:980, strike:1250, designs:5,
+    features:["1,000 kad + envelope","5 design pilihan","Cetakan premium 350gsm","Gold foil + emboss","Kotak eksklusif + ribbon","Penghantaran percuma","Siap 5–7 hari"]
+  },
+];
+
+/* ==========================================================
+   DATA ADD-ON
+   ========================================================== */
+const ADDONS = [
+  { id:"a1", name:"Gold Foil",        desc:"Kilauan emas pada nama & tarikh", price:80,  type:"fixed" },
+  { id:"a2", name:"Emboss",           desc:"Timbul pada tekstur kad",          price:60,  type:"fixed" },
+  { id:"a3", name:"Envelope Premium", desc:"Envelope berlapik + sticker",      price:50,  type:"fixed" },
+  { id:"a4", name:"Express 3 Hari",   desc:"Priority production",              price:70,  type:"fixed" },
+];
+
+/* ==========================================================
+   STATE
+   ========================================================== */
+let state = {
+  designs: [],
+  pkg: null,
+  addons: [],
+  filter: "Semua",
+  search: ""
+};
+
+/* load dari localStorage */
+try {
+  const saved = JSON.parse(localStorage.getItem("nascloud_kad") || "null");
+  if (saved) state = { ...state, ...saved, filter:"Semua", search:"" };
+} catch(e){}
+
+function save(){
+  localStorage.setItem("nascloud_kad", JSON.stringify({
+    designs: state.designs, pkg: state.pkg, addons: state.addons
+  }));
+}
+
+/* ==========================================================
+   RENDER — CHIPS
+   ========================================================== */
+const cats = ["Semua", ...new Set(DESIGNS.map(d => d.cat))];
+const chipsEl = document.getElementById("chips");
+cats.forEach(c => {
+  const b = document.createElement("button");
+  b.className = "chip" + (c === "Semua" ? " active" : "");
+  b.textContent = c;
+  b.onclick = () => {
+    state.filter = c;
+    document.querySelectorAll(".chip").forEach(x => x.classList.remove("active"));
+    b.classList.add("active");
+    renderDesigns();
+  };
+  chipsEl.appendChild(b);
+});
+
+/* ==========================================================
+   RENDER — DESIGNS
+   ========================================================== */
+const gridEl = document.getElementById("designGrid");
+
+function renderDesigns(){
+  const q = state.search.toLowerCase();
+  const list = DESIGNS.filter(d =>
+    (state.filter === "Semua" || d.cat === state.filter) &&
+    (d.name.toLowerCase().includes(q) || d.cat.toLowerCase().includes(q))
+  );
+
+  if (!list.length){
+    gridEl.innerHTML = `<p style="grid-column:1/-1;text-align:center;color:var(--muted);padding:40px">Tiada design dijumpai 😅</p>`;
+    return;
+  }
+
+  gridEl.innerHTML = list.map(d => `
+    <div class="design ${state.designs.includes(d.id) ? "selected":""}" data-id="${d.id}">
+      ${d.popular ? '<div class="badge-pop">Popular</div>' : ''}
+      <div class="tick">✓</div>
+      <div class="card-preview ${d.theme}">
+        <div class="orn tl"></div>
+        <div class="orn br"></div>
+        <div class="small">Walimatul Urus</div>
+        <div class="couple">${COUPLE}</div>
+        <div class="divider"></div>
+        <div class="date">12 · 12 · 2026</div>
+      </div>
+      <div class="design-meta">
+        <div>
+          <h4>${d.name}</h4>
+          <span>${d.cat}</span>
+        </div>
+      </div>
+    </div>
+  `).join("");
+
+  gridEl.querySelectorAll(".design").forEach(el => {
+    el.onclick = () => toggleDesign(el.dataset.id);
+  });
+}
+
+function toggleDesign(id){
+  const i = state.designs.indexOf(id);
+  if (i > -1) state.designs.splice(i,1);
+  else state.designs.push(id);
+  save(); renderDesigns(); renderSummary();
+}
+
+/* ==========================================================
+   RENDER — PACKAGES
+   ========================================================== */
+const pkgEl = document.getElementById("pkgGrid");
+
+function renderPackages(){
+  pkgEl.innerHTML = PACKAGES.map(p => `
+    <div class="pkg ${p.popular ? "popular":""} ${state.pkg === p.id ? "selected":""}" data-id="${p.id}">
+      ${p.popular ? '<div class="ribbon">Paling Laris</div>' : ''}
+      <h3>${p.name}</h3>
+      <div class="pcs">${p.pcs} · ${p.designs} design</div>
+      <div class="price"><sup>RM</sup>${p.price}<span class="strike">RM${p.strike}</span></div>
+      <ul>
+        ${p.features.map(f => `<li>${f}</li>`).join("")}
+      </ul>
+      <button class="btn ${state.pkg === p.id ? "btn-gold" : "btn-ghost"}" style="width:100%">
+        ${state.pkg === p.id ? "✓ Dipilih" : "Pilih Pakej"}
+      </button>
+    </div>
+  `).join("");
+
+  pkgEl.querySelectorAll(".pkg").forEach(el => {
+    el.onclick = () => {
+      state.pkg = (state.pkg === el.dataset.id) ? null : el.dataset.id;
+      save(); renderPackages(); renderSummary();
+    };
+  });
+}
+
+/* ==========================================================
+   RENDER — ADDONS
+   ========================================================== */
+const addonEl = document.getElementById("addonGrid");
+
+function renderAddons(){
+  addonEl.innerHTML = ADDONS.map(a => `
+    <label class="addon ${state.addons.includes(a.id) ? "on":""}" data-id="${a.id}">
+      <div class="box">✓</div>
+      <div class="addon-info">
+        <b>${a.name}</b>
+        <small>${a.desc}</small>
+      </div>
+      <div class="amt">+RM${a.price}</div>
+    </label>
+  `).join("");
+
+  addonEl.querySelectorAll(".addon").forEach(el => {
+    el.onclick = (e) => {
+      e.preventDefault();
+      const id = el.dataset.id;
+      const i = state.addons.indexOf(id);
+      if (i > -1) state.addons.splice(i,1);
+      else state.addons.push(id);
+      save(); renderAddons(); renderSummary();
+    };
+  });
+}
+
+/* ==========================================================
+   RENDER — SUMMARY
+   ========================================================== */
+function renderSummary(){
+  const body = document.getElementById("sumBody");
+  const totalEl = document.getElementById("sumTotal");
+  const waBtn = document.getElementById("waBtn");
+
+  const chosenDesigns = DESIGNS.filter(d => state.designs.includes(d.id));
+  const pkg = PACKAGES.find(p => p.id === state.pkg);
+  const chosenAddons = ADDONS.filter(a => state.addons.includes(a.id));
+
+  let rows = [];
+
+  rows.push(`<div class="sum-row ${chosenDesigns.length ? '' : 'muted'}">
+    <span>Design</span>
+    <span>${chosenDesigns.length ? chosenDesigns.map(d=>d.name).join(", ") : "Belum dipilih"}</span>
+  </div>`);
+
+  rows.push(`<div class="sum-row ${pkg ? '' : 'muted'}">
+    <span>Pakej</span>
+    <span>${pkg ? pkg.name + " · " + pkg.pcs : "Belum dipilih"}</span>
+  </div>`);
+
+  rows.push(`<div class="sum-row ${chosenAddons.length ? '' : 'muted'}">
+    <span>Add-on</span>
+    <span>${chosenAddons.length ? chosenAddons.map(a=>a.name).join(", ") : "Tiada"}</span>
+  </div>`);
+
+  body.innerHTML = rows.join("");
+
+  /* kira total */
+  let total = pkg ? pkg.price : 0;
+  chosenAddons.forEach(a => total += a.price);
+
+  /* warning kalau design lebih dari pakej */
+  let warn = "";
+  if (pkg && chosenDesigns.length > pkg.designs){
+    warn = `<div class="empty-note" style="color:#ffd88a">⚠ Anda pilih ${chosenDesigns.length} design, tapi ${pkg.name} hanya termasuk ${pkg.designs}. Tambahan RM30 setiap design.</div>`;
+    total += (chosenDesigns.length - pkg.designs) * 30;
+  }
+  if (!pkg){
+    warn = `<div class="empty-note">Pilih pakej untuk lihat jumlah harga penuh.</div>`;
+  }
+  body.innerHTML += warn;
+
+  totalEl.textContent = "RM" + total.toLocaleString("ms-MY");
+
+  const ready = pkg && chosenDesigns.length > 0;
+  waBtn.disabled = !ready;
+
+  /* store total untuk WhatsApp */
+  state._total = total;
+}
+
+/* ==========================================================
+   WHATSAPP ORDER
+   ========================================================== */
+document.getElementById("waBtn").onclick = () => {
+  const name  = document.getElementById("fName").value.trim();
+  const phone = document.getElementById("fPhone").value.trim();
+  const date  = document.getElementById("fDate").value;
+  const addr  = document.getElementById("fAddr").value.trim();
+  const note  = document.getElementById("fNote").value.trim();
+
+  if (!name || !phone){
+    toast("Sila isi nama & no. telefon dulu ✍️");
+    document.getElementById("fName").focus();
+    return;
+  }
+
+  const chosenDesigns = DESIGNS.filter(d => state.designs.includes(d.id)).map(d=>d.name).join(", ");
+  const pkg = PACKAGES.find(p => p.id === state.pkg);
+  const chosenAddons = ADDONS.filter(a => state.addons.includes(a.id)).map(a=>a.name).join(", ") || "Tiada";
+
+  const msg =
+`*PESANAN KAD KAHWIN — NasCloud*
+
+*Design:* ${chosenDesigns}
+*Pakej:* ${pkg.name} (${pkg.pcs})
+*Add-on:* ${chosenAddons}
+
+*Anggaran Harga:* RM${state._total.toLocaleString("ms-MY")}
+
+*— Maklumat —*
+Nama: ${name}
+Telefon: ${phone}
+Tarikh Majlis: ${date || "-"}
+Alamat: ${addr || "-"}
+Nota: ${note || "-"}
+
+Sila confirm & hantar preview. Terima kasih!`;
+
+  const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+  window.open(url, "_blank");
+};
+
+/* ==========================================================
+   RESET
+   ========================================================== */
+document.getElementById("resetBtn").onclick = () => {
+  state = { designs:[], pkg:null, addons:[], filter:"Semua", search:"" };
+  save();
+  document.getElementById("search").value = "";
+  document.querySelectorAll(".chip").forEach((c,i)=>c.classList.toggle("active", i===0));
+  renderDesigns(); renderPackages(); renderAddons(); renderSummary();
+  toast("Pilihan direset ✓");
+};
+
+/* ==========================================================
+   SEARCH
+   ========================================================== */
+document.getElementById("search").oninput = (e) => {
+  state.search = e.target.value;
+  renderDesigns();
+};
+
+/* ==========================================================
+   TOAST
+   ========================================================== */
+let toastTimer;
+function toast(msg){
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove("show"), 2400);
+}
+
+/* ==========================================================
+   INIT
+   ========================================================== */
+document.getElementById("yr").textContent = new Date().getFullYear();
+document.getElementById("footWa").href = `https://wa.me/${WA_NUMBER}`;
+
+renderDesigns();
+renderPackages();
+renderAddons();
+renderSummary();
+</script>
+</body>
+</html>

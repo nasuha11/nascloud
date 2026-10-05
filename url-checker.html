@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Checker — NASLab</title>
+    <meta name="theme-color" content="#080b0a">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <style>
+        /* =====================================
+           GLOBAL
+        ===================================== */
+        :root {
+            --bg: #080b0a;
+            --bg-secondary: #0c100d;
+            --card: #101612;
+            --green: #a3ff68;
+            --text: #f2f5f2;
+            --muted: #8d9890;
+            --border: rgba(255,255,255,0.08);
+            --mono: 'JetBrains Mono', monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        a { text-decoration: none; }
+        ::selection { background: var(--green); color: #080b0a; }
+
+        /* =====================================
+           NAVBAR
+        ===================================== */
+        .navbar { background: rgba(8,11,10,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); padding: 18px 0; transition: 0.3s; }
+        .navbar-brand { color: var(--text); font-size: 24px; font-weight: 800; letter-spacing: -1.5px; }
+        .navbar-brand span { color: var(--green); }
+        .nav-link { color: #9da79f; font-size: 13px; margin-left: 22px; transition: 0.3s; }
+        .nav-link:hover, .nav-link.active { color: var(--green); }
+        
+        /* =====================================
+           BUTTONS & UTILS
+        ===================================== */
+        .btn-primary-custom { display: inline-flex; align-items: center; gap: 12px; background: var(--green); color: #080b0a; border: 1px solid var(--green); border-radius: 6px; padding: 15px 22px; font-size: 12px; font-weight: 700; transition: 0.3s; cursor: pointer; border: none; }
+        .btn-primary-custom:hover { background: #c1ff9b; transform: translateY(-3px); box-shadow: 0 8px 35px rgba(163,255,104,0.13); }
+        .section-label { color: var(--green); font-family: var(--mono); font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 20px; }
+        
+        /* =====================================
+           URL CHECKER SPECIFIC
+        ===================================== */
+        .checker-section { min-height: 100vh; display: flex; align-items: center; padding-top: 100px; padding-bottom: 50px; }
+        .checker-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 40px; }
+        .checker-card h1 { font-size: 32px; font-weight: 700; letter-spacing: -1px; margin-bottom: 10px; }
+        .checker-card p { color: var(--muted); font-size: 14px; margin-bottom: 30px; }
+        
+        .form-control-custom { width: 100%; background: rgba(255,255,255,0.03); border: 1px solid var(--border); color: var(--text); padding: 16px 20px; border-radius: 8px; font-family: var(--mono); font-size: 13px; transition: 0.3s; margin-bottom: 20px; }
+        .form-control-custom:focus { outline: none; border-color: var(--green); background: rgba(255,255,255,0.05); }
+
+        /* RESULT BOX */
+        .result-box { display: none; margin-top: 25px; padding: 25px; border-radius: 8px; font-family: var(--mono); font-size: 12px; line-height: 1.8; border: 1px solid var(--border); background: rgba(0,0,0,0.2); }
+        .risk-high { color: #ff4757; }
+        .risk-med { color: #ffa502; }
+        .risk-low { color: var(--green); }
+        .flags-list { margin-top: 10px; padding-left: 20px; color: #a4b0a6; }
+        .flags-list li { margin-bottom: 5px; }
+
+        footer { padding: 28px 0; background: #070908; border-top: 1px solid var(--border); margin-top: auto; }
+        .footer-brand { color: white; font-size: 19px; font-weight: 800; letter-spacing: -1px; }
+        .footer-brand span { color: var(--green); }
+        .footer-text { color: #6e786f; font-size: 10px; }
+    </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">NAS<span>Lab</span>.</a>
+        <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="nav-item"><a class="nav-link" href="index.html#home">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#projects">Projects</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+                <li class="nav-item"><a class="nav-link active" href="url-checker.html">URL Checker</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<section class="checker-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                
+                <div class="checker-card">
+                    <div class="section-label">TOOL / 01</div>
+                    <h1>Phishing URL Checker.</h1>
+                    <p>Heuristic-based URL risk scanner. This tool flags suspicious patterns but does not prove a URL is malicious.</p>
+                    
+                    <form id="urlForm" onsubmit="event.preventDefault(); scanURL();">
+                        <input type="text" id="urlInput" class="form-control-custom" placeholder="e.g. https://login.secure.maybank.verify.xyz" autocomplete="off">
+                        
+                        <button type="submit" class="btn-primary-custom w-100 justify-content-center">
+                            Scan URL <i class="bi bi-search"></i>
+                        </button>
+                    </form>
+
+                    <!-- Result Output -->
+                    <div id="resultBox" class="result-box">
+                        <div style="margin-bottom: 15px; font-size: 14px;">
+                            <strong>URL:</strong> <span id="outUrl" style="word-break: break-all; color: var(--text);"></span><br>
+                            <strong>Domain:</strong> <span id="outDomain" style="color: var(--text);"></span><br>
+                            <strong>Risiko:</strong> <span id="outRisk" style="font-weight:bold;"></span> (Skor heuristik: <span id="outScore"></span>)
+                        </div>
+                        
+                        <div id="flagsContainer">
+                            <strong>Petanda mencurigakan:</strong>
+                            <ul id="flagsList" class="flags-list"></ul>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+            <a href="index.html" class="footer-brand">NAS<span>Lab</span>.</a>
+            <div class="footer-text">&copy; <span id="year"></span> NASLab. Built with curiosity.</div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // --- REFERENCE DATA (Diambil dari kod Python) ---
+    const SUSPICIOUS_TLDS = ["zip", "mov", "top", "xyz", "tk", "ml", "ga", "cf", "gq", "click", "link", "work", "support", "lol", "surf", "icu", "rest", "cam"];
+    const KNOWN_SHORTENERS = ["bit.ly", "tinyurl.com", "t.co", "goo.gl", "ow.ly", "is.gd", "buff.ly", "rebrand.ly", "cutt.ly", "shorturl.at"];
+    const BRAND_KEYWORDS = ["maybank", "cimb", "publicbank", "rhb", "hongleong", "bsn", "bankislam", "lhdn", "jpj", "epf", "kwsp", "socso", "perkeso", "mycsl", "spa", "microsoft", "office365", "google", "paypal", "dhl", "poslaju", "touchngo", "tng", "shopee", "lazada", "grab"];
+    const SUSPICIOUS_WORDS = ["verify", "update", "secure", "account", "confirm", "login", "signin"];
+
+    // Fungsi semak IP Address
+    function isIpAddress(host) {
+        // Simple regex to match IPv4
+        const ipv4Regex = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+        return ipv4Regex.test(host);
+    }
+
+    function scanURL() {
+        let rawInput = document.getElementById('urlInput').value.trim();
+        const resultBox = document.getElementById('resultBox');
+        
+        if (!rawInput) return;
+
+        let flags = [];
+        let score = 0;
+        let urlToParse = rawInput;
+
+        // Force HTTP jika tiada scheme supaya URL parser JS boleh baca domain
+        if (!/^https?:\/\//i.test(rawInput)) {
+            urlToParse = "http://" + rawInput;
+        }
+
+        try {
+            const parsed = new URL(urlToParse);
+            let host = parsed.hostname.toLowerCase();
+            let fullUrl = rawInput.toLowerCase();
+
+            // 1. No HTTPS
+            if (parsed.protocol !== "https:") {
+                flags.push("Tidak guna HTTPS");
+                score += 1;
+            }
+
+            // 2. IP address instead of domain name
+            if (isIpAddress(host)) {
+                flags.push("Guna alamat IP sebagai domain (bukan nama domain biasa)");
+                score += 3;
+            }
+
+            // 3. '@' symbol in URL
+            if (rawInput.includes("@")) {
+                flags.push("Mengandungi simbol '@' — boleh menyembunyikan domain sebenar");
+                score += 3;
+            }
+
+            // 4. Punycode attempt
+            if (host.includes("xn--")) {
+                flags.push("Domain guna punycode (xn--) — mungkin cuba meniru domain lain");
+                score += 3;
+            }
+
+            // 5. Suspicious TLD
+            let parts = host.split(".");
+            let tld = parts.length > 1 ? parts[parts.length - 1] : "";
+            if (SUSPICIOUS_TLDS.includes(tld)) {
+                flags.push(`Guna TLD yang kerap disalahgunakan untuk scam (.${tld})`);
+                score += 2;
+            }
+
+            // 6. Known URL shortener
+            if (KNOWN_SHORTENERS.includes(host)) {
+                flags.push("URL shortener — destinasi sebenar disembunyikan");
+                score += 2;
+            }
+
+            // 7. Excessive subdomains
+            let subdomainCount = parts.length - 1;
+            if (subdomainCount >= 3) {
+                flags.push(`Terlalu banyak subdomain (${subdomainCount}) — corak biasa phishing`);
+                score += 2;
+            }
+
+            // 8. Brand keyword present but not as actual registered domain
+            let registrable = parts.length >= 2 ? parts.slice(-2).join(".") : host;
+            for (let brand of BRAND_KEYWORDS) {
+                if (fullUrl.includes(brand) && !registrable.includes(brand)) {
+                    flags.push(`Nama jenama '${brand}' muncul dalam URL tetapi bukan domain sebenar`);
+                    score += 3;
+                    break;
+                }
+            }
+
+            // 9. Hyphen-heavy domain
+            let hyphenCount = (host.match(/-/g) || []).length;
+            if (hyphenCount >= 2) {
+                flags.push("Domain mengandungi banyak tanda sempang — corak typosquatting");
+                score += 1;
+            }
+
+            // 10. Overly long URL
+            if (rawInput.length > 100) {
+                flags.push("URL sangat panjang — boleh digunakan untuk mengelirukan");
+                score += 1;
+            }
+
+            // 11. Suspicious keywords in path/query
+            for (let word of SUSPICIOUS_WORDS) {
+                if (fullUrl.includes(word)) {
+                    flags.push(`Mengandungi kata kunci sensitif ('${word}') biasa dalam phishing`);
+                    score += 1;
+                    break;
+                }
+            }
+
+            // Evaluasi Risiko
+            let riskLevel = "";
+            let riskClass = "";
+            if (score >= 7) {
+                riskLevel = "TINGGI";
+                riskClass = "risk-high";
+            } else if (score >= 3) {
+                riskLevel = "SEDERHANA";
+                riskClass = "risk-med";
+            } else {
+                riskLevel = "RENDAH";
+                riskClass = "risk-low";
+            }
+
+            // Kemaskini UI
+            document.getElementById('outUrl').innerText = rawInput;
+            document.getElementById('outDomain').innerText = host;
+            
+            let riskSpan = document.getElementById('outRisk');
+            riskSpan.innerText = riskLevel;
+            riskSpan.className = riskClass;
+            
+            document.getElementById('outScore').innerText = score;
+
+            let flagsContainer = document.getElementById('flagsContainer');
+            let flagsList = document.getElementById('flagsList');
+            flagsList.innerHTML = ""; // Clear lama
+
+            if (flags.length > 0) {
+                flagsContainer.style.display = "block";
+                flags.forEach(f => {
+                    let li = document.createElement("li");
+                    li.innerText = f;
+                    flagsList.appendChild(li);
+                });
+            } else {
+                flagsContainer.style.display = "block";
+                flagsList.innerHTML = "<li>Tiada petanda mencurigakan dikesan oleh heuristik.</li>";
+            }
+
+            resultBox.style.display = "block";
+
+        } catch (e) {
+            alert("Sila masukkan URL yang sah.");
+        }
+    }
+</script>
+
+</body>
+</html>

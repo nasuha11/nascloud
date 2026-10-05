@@ -16,40 +16,45 @@
 
     <style>
         :root {
-            --bg: #080b0a;
             --card: #101612;
             --text: #f2f5f2;
             --border: rgba(255,255,255,0.08);
+            --red-danger: #ff0033; /* Warna merah amaran */
         }
         
         body {
-            background-color: var(--bg);
+            /* Pastikan fail gambar kau dinamakan 'hacker-skull.jpg' dan diletakkan dalam folder yang sama */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.9)), url('hacker-skull.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-color: #000;
             color: var(--text);
             font-family: 'Inter', sans-serif;
-            /* Pastikan background penuh skrin */
             height: 100vh;
             overflow: hidden; 
         }
 
         /* Styling Modal (Pop-up) */
         .modal-content {
-            background-color: var(--card);
-            border: 1px solid #ffa502;
+            background-color: rgba(16, 22, 18, 0.95); /* Sedikit lutsinar untuk nampak background */
+            border: 1px solid var(--red-danger);
             border-radius: 12px;
-            box-shadow: 0 15px 50px rgba(255, 165, 2, 0.15);
+            box-shadow: 0 15px 50px rgba(255, 0, 51, 0.25);
+            backdrop-filter: blur(5px);
         }
 
         .modal-header {
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid rgba(255, 0, 51, 0.2);
         }
 
         .modal-footer {
-            border-top: 1px solid var(--border);
+            border-top: 1px solid rgba(255, 0, 51, 0.2);
         }
         
         .btn-custom {
-            background-color: #ffa502;
-            color: #000;
+            background-color: var(--red-danger);
+            color: #fff;
             font-weight: 600;
             border-radius: 6px;
             padding: 12px 20px;
@@ -58,41 +63,45 @@
             text-decoration: none;
             display: inline-block;
             text-align: center;
+            border: none;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .btn-custom:hover {
-            background-color: #ffb12b;
-            color: #000;
+            background-color: #cc0029;
+            color: #fff;
             transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 0, 51, 0.4);
         }
     </style>
 </head>
 <body>
 
 <!-- Modal Peringatan Simulasi Phishing -->
-<!-- data-bs-backdrop="static" menghalang user dari klik luar untuk tutup pop up -->
 <div class="modal fade" id="phishingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             
             <div class="modal-header pb-3">
-                <h5 class="modal-title" style="color: #ffa502; font-weight: 700; font-size: 18px;">
-                    <i class="bi bi-shield-exclamation me-2"></i> Latihan Keselamatan Siber
+                <h5 class="modal-title" style="color: var(--red-danger); font-weight: 800; font-size: 19px; text-transform: uppercase; letter-spacing: 1px;">
+                    <i class="bi bi-skull-fill me-2"></i> Latihan Keselamatan Siber
                 </h5>
             </div>
             
             <div class="modal-body" style="color: var(--text); font-size: 14px; line-height: 1.8; padding: 25px;">
-                <strong>Jangan panik!</strong> Pautan (link) yang anda klik sebentar tadi adalah satu simulasi yang selamat dan merupakan salah satu inisiatif <strong>Kempen Kesedaran Phishing</strong> anjuran <strong>Bahagian ICT MAIWP</strong>.
+                <strong style="color: var(--red-danger); font-size: 16px;">JANGAN PANIK!</strong> 
                 <br><br>
-                Tujuan latihan ini diadakan adalah untuk menguji dan meningkatkan tahap kewaspadaan warga kerja terhadap ancaman siber. Sekiranya ini adalah serangan <em>phishing</em> yang sebenar, maklumat peribadi atau kata laluan anda mungkin telah terdedah dan dicuri.
+                Pautan (link) yang anda klik sebentar tadi adalah satu simulasi yang selamat dan merupakan salah satu inisiatif <strong>Kempen Kesedaran Phishing</strong> anjuran <strong>Bahagian ICT MAIWP</strong>.
                 <br><br>
-                <span style="color: #a4b0a6; font-size: 13px;">
-                    <i class="bi bi-info-circle me-1"></i> Sila semak dengan teliti alamat URL dan identiti penghantar sebelum menekan mana-mana pautan pada masa akan datang.
+                Tujuan latihan ini diadakan adalah untuk menguji dan meningkatkan tahap kewaspadaan warga kerja terhadap ancaman siber. Sekiranya ini adalah serangan <em>phishing</em> yang sebenar, maklumat peribadi atau kata laluan anda mungkin telah terdedah dan dicuri oleh pihak tidak bertanggungjawab.
+                <br><br>
+                <span style="color: #a4b0a6; font-size: 13px; border-left: 3px solid var(--red-danger); padding-left: 10px; display: block;">
+                    <i class="bi bi-exclamation-triangle-fill me-1" style="color: var(--red-danger);"></i> Sila semak dengan teliti alamat URL dan identiti penghantar sebelum menekan mana-mana pautan pada masa akan datang.
                 </span>
             </div>
             
             <div class="modal-footer pt-3">
-                <!-- Butang ini akan membawa mereka kembali ke halaman utama bila ditekan -->
                 <a href="../index.html" class="btn-custom">Saya Faham & Akan Lebih Berwaspada</a>
             </div>
             

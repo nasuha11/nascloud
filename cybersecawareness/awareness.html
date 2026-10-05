@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kesedaran Keselamatan Siber — NASLab</title>
-    <meta name="theme-color" content="#080b0a">
+    <meta name="theme-color" content="#ffffff">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,33 +17,37 @@
 
     <style>
         /* =====================================
-           GLOBAL
+           GLOBAL (TEMA CERAH / PUTIH)
         ===================================== */
         :root {
-            --bg: #080b0a;
-            --bg-secondary: #0c100d;
-            --card: #101612;
-            --green: #a3ff68;
-            --red: #ff4757;
-            --yellow: #ffa502;
-            --text: #f2f5f2;
-            --muted: #8d9890;
-            --border: rgba(255,255,255,0.08);
+            --bg: #ffffff;
+            --bg-secondary: #f8f9fa; /* Kelabu sangat cerah untuk bahagian kedua */
+            --card: #ffffff;
+            
+            /* Warna ditukar sedikit supaya jelas pada background putih */
+            --green: #10b981; 
+            --red: #ef4444;
+            --yellow: #f59e0b;
+            
+            --text: #1a1d20; /* Teks Hitam/Kelabu Gelap */
+            --muted: #6c757d;
+            --border: rgba(0,0,0,0.1); /* Border kelabu lembut */
             --mono: 'JetBrains Mono', monospace;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; line-height: 1.6; }
         a { text-decoration: none; }
-        ::selection { background: var(--green); color: #080b0a; }
+        ::selection { background: var(--green); color: #ffffff; }
 
         /* =====================================
            NAVBAR
         ===================================== */
-        .navbar { background: rgba(8,11,10,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); padding: 18px 0; transition: 0.3s; z-index: 1030; }
+        .navbar { background: rgba(255,255,255,0.9); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); padding: 18px 0; transition: 0.3s; z-index: 1030; }
         .navbar-brand { color: var(--text); font-size: 24px; font-weight: 800; letter-spacing: -1.5px; }
         .navbar-brand span { color: var(--green); }
-        .nav-link { color: #9da79f; font-size: 13px; margin-left: 22px; transition: 0.3s; }
+        .navbar-brand:hover { color: #000; }
+        .nav-link { color: #5c636a; font-size: 13px; margin-left: 22px; transition: 0.3s; font-weight: 500; }
         .nav-link:hover, .nav-link:focus, .nav-link:active, .nav-link.active { color: var(--green); }
 
         /* =====================================
@@ -52,18 +56,18 @@
         .hero-header {
             padding: 140px 0 60px;
             text-align: center;
-            background: linear-gradient(to bottom, rgba(163,255,104,0.05), transparent);
+            background: linear-gradient(to bottom, rgba(16,185,129,0.05), transparent);
             border-bottom: 1px solid var(--border);
         }
-        .section-label { color: var(--green); font-family: var(--mono); font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 15px; display: inline-block; padding: 6px 12px; background: rgba(163,255,104,0.1); border-radius: 50px; border: 1px solid rgba(163,255,104,0.2); }
-        .hero-header h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 800; letter-spacing: -2px; margin-bottom: 15px; }
+        .section-label { color: var(--green); font-family: var(--mono); font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 15px; display: inline-block; padding: 6px 12px; background: rgba(16,185,129,0.1); border-radius: 50px; border: 1px solid rgba(16,185,129,0.2); font-weight: 600;}
+        .hero-header h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 800; letter-spacing: -2px; margin-bottom: 15px; color: var(--text); }
         .hero-header p { color: var(--muted); font-size: 15px; max-width: 600px; margin: 0 auto; }
 
         /* =====================================
            INFO CARDS
         ===================================== */
         .info-section { padding: 80px 0; }
-        .info-title { font-size: 28px; font-weight: 700; margin-bottom: 40px; letter-spacing: -1px; }
+        .info-title { font-size: 28px; font-weight: 700; margin-bottom: 40px; letter-spacing: -1px; color: var(--text); }
         
         .card-custom {
             background: var(--card);
@@ -74,32 +78,35 @@
             transition: 0.3s;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
         }
         .card-custom::before { content: ""; position: absolute; top: 0; left: 0; width: 0; height: 3px; transition: 0.4s; }
-        .card-custom:hover { transform: translateY(-5px); background: #131a15; }
+        
+        /* Kesan Hover untuk Tema Cerah */
+        .card-custom:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
         .card-custom:hover::before { width: 100%; }
 
         /* Green Theme (Before Click) */
         .theme-safe::before { background: var(--green); }
-        .theme-safe:hover { border-color: rgba(163,255,104,0.3); }
-        .theme-safe .icon-box { color: var(--green); background: rgba(163,255,104,0.08); border: 1px solid rgba(163,255,104,0.15); }
+        .theme-safe:hover { border-color: rgba(16,185,129,0.3); }
+        .theme-safe .icon-box { color: var(--green); background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2); }
 
         /* Red Theme (After Click) */
         .theme-danger::before { background: var(--red); }
-        .theme-danger:hover { border-color: rgba(255,71,87,0.3); }
-        .theme-danger .icon-box { color: var(--red); background: rgba(255,71,87,0.08); border: 1px solid rgba(255,71,87,0.15); }
+        .theme-danger:hover { border-color: rgba(239,68,68,0.3); }
+        .theme-danger .icon-box { color: var(--red); background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); }
 
         .icon-box { width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 10px; font-size: 22px; margin-bottom: 20px; }
-        .card-custom h4 { font-size: 18px; font-weight: 600; margin-bottom: 12px; }
+        .card-custom h4 { font-size: 18px; font-weight: 600; margin-bottom: 12px; color: var(--text); }
         .card-custom p { color: var(--muted); font-size: 13px; line-height: 1.8; margin: 0; }
 
         /* =====================================
            FOOTER
         ===================================== */
-        footer { padding: 28px 0; background: #070908; border-top: 1px solid var(--border); }
-        .footer-brand { color: white; font-size: 19px; font-weight: 800; letter-spacing: -1px; }
+        footer { padding: 28px 0; background: #ffffff; border-top: 1px solid var(--border); }
+        .footer-brand { color: var(--text); font-size: 19px; font-weight: 800; letter-spacing: -1px; }
         .footer-brand span { color: var(--green); }
-        .footer-text { color: #6e786f; font-size: 10px; }
+        .footer-text { color: var(--muted); font-size: 10px; }
     </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -108,7 +115,7 @@
 <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
         <a class="navbar-brand" href="index.html">NAS<span>Lab</span>.</a>
-        <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" style="border-color: rgba(0,0,0,0.1);">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -170,7 +177,7 @@
                 <div class="card-custom theme-safe">
                     <div class="icon-box"><i class="bi bi-link-45deg"></i></div>
                     <h4>4. Guna URL Checker</h4>
-                    <p>Jika masih ragu-ragu, jangan terus klik. Salin (copy) pautan tersebut dan semak menggunakan <a href="url-checker.html" style="color: var(--green);">URL Checker NASLab</a> untuk mengesan corak phishing yang tersembunyi.</p>
+                    <p>Jika masih ragu-ragu, jangan terus klik. Salin (copy) pautan tersebut dan semak menggunakan <a href="url-checker.html" style="color: var(--green); font-weight: 600;">URL Checker NASLab</a> untuk mengesan corak phishing yang tersembunyi.</p>
                 </div>
             </div>
         </div>
@@ -208,7 +215,7 @@
                 <div class="card-custom theme-danger">
                     <div class="icon-box"><i class="bi bi-key"></i></div>
                     <h4>3. Tukar Kata Laluan</h4>
-                    <p>Jika anda tersilap memasukkan butiran akaun sebelum menyedari ia adalah *scam*, pergi ke aplikasi rasmi atau tapak web rasmi melalui carian Google dan tukar kata laluan anda dengan segera.</p>
+                    <p>Jika anda tersilap memasukkan butiran akaun sebelum menyedari ia adalah *scam*, pergi ke tapak web rasmi melalui carian Google dan tukar kata laluan anda dengan segera.</p>
                 </div>
             </div>
             <!-- Tindakan 4 -->

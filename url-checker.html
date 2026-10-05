@@ -41,7 +41,9 @@
         .navbar-brand { color: var(--text); font-size: 24px; font-weight: 800; letter-spacing: -1.5px; }
         .navbar-brand span { color: var(--green); }
         .nav-link { color: #9da79f; font-size: 13px; margin-left: 22px; transition: 0.3s; }
-        .nav-link:hover, .nav-link.active { color: var(--green); }
+        
+        /* Pembetulan supaya link tak hilang bila tekan back */
+        .nav-link:hover, .nav-link:focus, .nav-link:active, .nav-link.active { color: var(--green); }
         
         /* =====================================
            BUTTONS & UTILS
@@ -84,9 +86,13 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-
-
-
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="nav-item"><a class="nav-link" href="index.html#home">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#projects">Projects</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+                <li class="nav-item"><a class="nav-link active" href="url-checker.html">URL Checker</a></li>
+            </ul>
         </div>
     </div>
 </nav>
@@ -139,19 +145,39 @@
     </div>
 </footer>
 
+<!-- Modal Peringatan Phishing -->
+<div class="modal fade" id="phishingModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="background-color: var(--card); border: 1px solid #ff4757; border-radius: 12px; box-shadow: 0 10px 40px rgba(255, 71, 87, 0.2);">
+            <div class="modal-header" style="border-bottom: 1px solid var(--border);">
+                <h5 class="modal-title" style="color: #ff4757; font-weight: 700; font-size: 18px;">
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i> Peringatan Keselamatan
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="color: var(--text); font-size: 14px; line-height: 1.8; padding: 25px;">
+                URL Link yang anda sertakan kemungkinan <strong>phishing link</strong>.
+                <br><br>
+                Sila laporkan kepada <strong>unit BTM MAIWP</strong>.
+            </div>
+            <div class="modal-footer" style="border-top: 1px solid var(--border);">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" style="font-size: 12px; font-weight: 600; border-radius: 6px; padding: 10px 20px;">Faham & Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // --- REFERENCE DATA (Diambil dari kod Python) ---
+    // --- REFERENCE DATA ---
     const SUSPICIOUS_TLDS = ["zip", "mov", "top", "xyz", "tk", "ml", "ga", "cf", "gq", "click", "link", "work", "support", "lol", "surf", "icu", "rest", "cam"];
     const KNOWN_SHORTENERS = ["bit.ly", "tinyurl.com", "t.co", "goo.gl", "ow.ly", "is.gd", "buff.ly", "rebrand.ly", "cutt.ly", "shorturl.at"];
     const BRAND_KEYWORDS = ["maybank", "cimb", "publicbank", "rhb", "hongleong", "bsn", "bankislam", "lhdn", "jpj", "epf", "kwsp", "socso", "perkeso", "mycsl", "spa", "microsoft", "office365", "google", "paypal", "dhl", "poslaju", "touchngo", "tng", "shopee", "lazada", "grab"];
     const SUSPICIOUS_WORDS = ["verify", "update", "secure", "account", "confirm", "login", "signin"];
 
-    // Fungsi semak IP Address
     function isIpAddress(host) {
-        // Simple regex to match IPv4
         const ipv4Regex = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
         return ipv4Regex.test(host);
     }
@@ -166,7 +192,6 @@
         let score = 0;
         let urlToParse = rawInput;
 
-        // Force HTTP jika tiada scheme supaya URL parser JS boleh baca domain
         if (!/^https?:\/\//i.test(rawInput)) {
             urlToParse = "http://" + rawInput;
         }
@@ -182,19 +207,19 @@
                 score += 1;
             }
 
-            // 2. IP address instead of domain name
+            // 2. IP address
             if (isIpAddress(host)) {
                 flags.push("Guna alamat IP sebagai domain (bukan nama domain biasa)");
                 score += 3;
             }
 
-            // 3. '@' symbol in URL
+            // 3. '@' symbol
             if (rawInput.includes("@")) {
                 flags.push("Mengandungi simbol '@' — boleh menyembunyikan domain sebenar");
                 score += 3;
             }
 
-            // 4. Punycode attempt
+            // 4. Punycode
             if (host.includes("xn--")) {
                 flags.push("Domain guna punycode (xn--) — mungkin cuba meniru domain lain");
                 score += 3;
@@ -221,7 +246,7 @@
                 score += 2;
             }
 
-            // 8. Brand keyword present but not as actual registered domain
+            // 8. Brand keyword checking
             let registrable = parts.length >= 2 ? parts.slice(-2).join(".") : host;
             for (let brand of BRAND_KEYWORDS) {
                 if (fullUrl.includes(brand) && !registrable.includes(brand)) {
@@ -231,20 +256,20 @@
                 }
             }
 
-            // 9. Hyphen-heavy domain
+            // 9. Hyphen-heavy
             let hyphenCount = (host.match(/-/g) || []).length;
             if (hyphenCount >= 2) {
                 flags.push("Domain mengandungi banyak tanda sempang — corak typosquatting");
                 score += 1;
             }
 
-            // 10. Overly long URL
+            // 10. Long URL
             if (rawInput.length > 100) {
                 flags.push("URL sangat panjang — boleh digunakan untuk mengelirukan");
                 score += 1;
             }
 
-            // 11. Suspicious keywords in path/query
+            // 11. Suspicious keywords
             for (let word of SUSPICIOUS_WORDS) {
                 if (fullUrl.includes(word)) {
                     flags.push(`Mengandungi kata kunci sensitif ('${word}') biasa dalam phishing`);
@@ -259,6 +284,11 @@
             if (score >= 7) {
                 riskLevel = "TINGGI";
                 riskClass = "risk-high";
+                
+                // Trigger pop-up amaran BTM MAIWP
+                let phishingModal = new bootstrap.Modal(document.getElementById('phishingModal'));
+                phishingModal.show();
+                
             } else if (score >= 3) {
                 riskLevel = "SEDERHANA";
                 riskClass = "risk-med";
@@ -279,7 +309,7 @@
 
             let flagsContainer = document.getElementById('flagsContainer');
             let flagsList = document.getElementById('flagsList');
-            flagsList.innerHTML = ""; // Clear lama
+            flagsList.innerHTML = ""; 
 
             if (flags.length > 0) {
                 flagsContainer.style.display = "block";
